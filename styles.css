@@ -962,6 +962,10 @@ body {
         display: flex;
     }
     
+    .hero {
+        padding-top: 80px;
+    }
+    
     .hero-title {
         font-size: 32px;
         line-height: 0.7;
@@ -1039,6 +1043,10 @@ body {
 }
 
 @media (max-width: 480px) {
+    .hero {
+        padding-top: 90px;
+    }
+    
     .hero-title {
         font-size: 26px;
         line-height: 0.7;
