@@ -963,7 +963,7 @@ body {
     }
     
     .hero {
-        padding-top: 80px;
+        padding-top: 120px;
     }
     
     .hero-title {
@@ -1044,7 +1044,7 @@ body {
 
 @media (max-width: 480px) {
     .hero {
-        padding-top: 90px;
+        padding-top: 130px;
     }
     
     .hero-title {
