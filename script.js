@@ -47,7 +47,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 });
 
 // Sequential Typing Animation for Hero Title
-function typeWriter(element, text, speed = 80) {
+function typeWriter(element, text, speed = 40) {
     return new Promise((resolve) => {
         let i = 0;
         element.innerHTML = '';
@@ -64,7 +64,7 @@ function typeWriter(element, text, speed = 80) {
                 setTimeout(() => {
                     element.style.borderRight = 'none';
                     resolve();
-                }, 300);
+                }, 150);
             }
         }
         
@@ -84,14 +84,14 @@ async function startHeroTyping() {
         const text3 = line3.textContent;
         
         // Wait a bit before starting
-        await new Promise(resolve => setTimeout(resolve, 800));
+        await new Promise(resolve => setTimeout(resolve, 400));
         
         // Type each line sequentially
-        await typeWriter(line1, text1, 80);
-        await new Promise(resolve => setTimeout(resolve, 200));
-        await typeWriter(line2, text2, 80);
-        await new Promise(resolve => setTimeout(resolve, 200));
-        await typeWriter(line3, text3, 80);
+        await typeWriter(line1, text1, 40);
+        await new Promise(resolve => setTimeout(resolve, 100));
+        await typeWriter(line2, text2, 40);
+        await new Promise(resolve => setTimeout(resolve, 100));
+        await typeWriter(line3, text3, 40);
     }
 }
 
