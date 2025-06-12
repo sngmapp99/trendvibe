@@ -47,7 +47,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 });
 
 // Sequential Typing Animation for Hero Title
-function typeWriter(element, text, speed = 40) {
+function typeWriter(element, text, speed = 20) {
     return new Promise((resolve) => {
         let i = 0;
         element.innerHTML = '';
@@ -87,11 +87,11 @@ async function startHeroTyping() {
         await new Promise(resolve => setTimeout(resolve, 400));
         
         // Type each line sequentially
-        await typeWriter(line1, text1, 40);
+        await typeWriter(line1, text1, 20);
         await new Promise(resolve => setTimeout(resolve, 100));
-        await typeWriter(line2, text2, 40);
+        await typeWriter(line2, text2, 20);
         await new Promise(resolve => setTimeout(resolve, 100));
-        await typeWriter(line3, text3, 40);
+        await typeWriter(line3, text3, 20);
     }
 }
 
@@ -100,7 +100,12 @@ window.addEventListener('load', () => {
     startHeroTyping();
 });
 
-// Contact Form Handling
+// Initialize EmailJS
+(function() {
+    emailjs.init("YOUR_PUBLIC_KEY"); // 실제 사용시 EmailJS 공개 키로 교체
+})();
+
+// Contact Form Handling with EmailJS
 contactForm?.addEventListener('submit', async (e) => {
     e.preventDefault();
     
@@ -116,16 +121,36 @@ contactForm?.addEventListener('submit', async (e) => {
     submitButton.disabled = true;
     
     try {
-        // Simulate form submission (replace with actual API call)
-        await new Promise(resolve => setTimeout(resolve, 2000));
+        // EmailJS 서비스를 사용하여 이메일 전송
+        const templateParams = {
+            from_name: formObject.name,
+            from_email: formObject.email,
+            subject: formObject.subject || 'Contact Form Submission',
+            message: formObject.message,
+            to_email: 'contact@trendvibe.co.kr'
+        };
+
+        // EmailJS를 통한 이메일 전송 (실제 환경에서는 SERVICE_ID와 TEMPLATE_ID 필요)
+        await emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', templateParams);
         
         // Success message
-        showNotification('Message sent successfully!', 'success');
+        showNotification('Message sent successfully! We will get back to you soon.', 'success');
         contactForm.reset();
         
     } catch (error) {
-        // Error message
-        showNotification('An error occurred while sending. Please try again.', 'error');
+        console.error('Error sending email:', error);
+        
+        // 대체 방법: mailto 링크 생성
+        const subject = encodeURIComponent(formObject.subject || 'Contact Form Submission');
+        const body = encodeURIComponent(`Name: ${formObject.name}\nEmail: ${formObject.email}\n\nMessage:\n${formObject.message}`);
+        const mailtoLink = `mailto:contact@trendvibe.co.kr?subject=${subject}&body=${body}`;
+        
+        // 새 창에서 이메일 클라이언트 열기
+        window.open(mailtoLink, '_blank');
+        
+        showNotification('Opening your email client. Please send the message from there.', 'success');
+        contactForm.reset();
+        
     } finally {
         // Reset button
         submitButton.innerHTML = originalButtonText;
