@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms of Service - Win or Loss</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="logo/favicon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="logo/favicon.png">
+    <link rel="apple-touch-icon" href="logo/favicon.png">
+    <link rel="shortcut icon" href="logo/favicon.png">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="policy-content">
+            <h1>Terms of Service</h1>
+            
+            <div name="termly-embed" data-id="f6740fdf-0832-4bea-89d7-6c0f0dc2c486"></div>
+            <script type="text/javascript">(function(d, s, id) {
+              var js, tjs = d.getElementsByTagName(s)[0];
+              if (d.getElementById(id)) return;
+              js = d.createElement(s); js.id = id;
+              js.src = "https://app.termly.io/embed-policy.min.js";
+              tjs.parentNode.insertBefore(js, tjs);
+            }(document, 'script', 'termly-jssdk'));</script>
+            
+            <script>
+            // Force black text color after Termly content loads
+            function forceBlackText() {
+                const termlyElements = document.querySelectorAll('div[name="termly-embed"], div[name="termly-embed"] *');
+                termlyElements.forEach(function(element) {
+                    element.style.setProperty('color', '#000000', 'important');
+                    element.style.setProperty('background', 'transparent', 'important');
+                    element.style.setProperty('background-color', 'transparent', 'important');
+                });
+            }
+            
+            // Run multiple times to catch dynamically loaded content
+            setTimeout(forceBlackText, 1000);
+            setTimeout(forceBlackText, 2000);
+            setTimeout(forceBlackText, 3000);
+            
+            // Also run when page loads
+            document.addEventListener('DOMContentLoaded', forceBlackText);
+            window.addEventListener('load', forceBlackText);
+            </script>
+        </div>
+    </div>
+</body>
+</html> 
